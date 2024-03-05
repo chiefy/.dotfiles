@@ -1,0 +1,3 @@
+zsh-users/zsh-completions
+Aloxaf/fzf-tab
+spaceship-prompt/spaceship-prompt

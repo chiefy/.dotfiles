@@ -1,0 +1,76 @@
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+export AWS_REGION=us-east-1
+export LANG=en_US.UTF-8
+export WORK="${HOME}/Work"
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
+export CLICOLOR=1
+
+if [ -f /usr/local/etc/openssl/certs/zscaler_root_ca.pem ]; then
+    export NODE_EXTRA_CA_CERTS=/usr/local/etc/openssl/certs/zscaler_root_ca.pem
+fi
+
+if [ -d ${WORK}/re-makefiles-common ]; then
+    export MAKE_COMMON="${WORK}/re-makefiles-common"
+fi
+
+if uname | grep Darwin &>/dev/null && which brew &>/dev/null; then
+    export IS_MAC=1
+fi
+
+eval $(dircolors)
+
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history" # The path to the history file.
+HISTSIZE=10000                            # The maximum number of events to save in the internal history.
+SAVEHIST=10000                            # The maximum number of events to save in the history file.
+
+setopt BANG_HIST              # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY       # Write the history file in the ':start:elapsed;command' format.
+setopt INC_APPEND_HISTORY     # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY          # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS       # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS   # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS      # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE      # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS      # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY            # Do not execute immediately upon history expansion.
+
+# handy keybindings
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^K" kill-line
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" history-search-backward
+bindkey "^Y" accept-and-hold
+bindkey "^N" insert-last-word
+bindkey "^Q" push-line-or-edit
+bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
+
+# aliases
+alias ls='ls --color=auto -G'
+
+autoload -U compinit; compinit
+
+# Color in the file completion list
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# FZF config / setup
+#export FZF_DEFAULT_COMMAND='fd --no-messages --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --inline-info --border"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# BAT config / setup
+export BAT_THEME='gruvbox-dark'
+alias cat='bat --paging=never'
+
+# source antidote
+if [ ! -z $IS_MAC ]; then
+    source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+else
+    source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+fi
+
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load
