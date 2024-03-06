@@ -13,8 +13,9 @@ if [ -d ${WORK}/re-makefiles-common ]; then
     export MAKE_COMMON="${WORK}/re-makefiles-common"
 fi
 
-if uname | grep Darwin &>/dev/null && which brew &>/dev/null; then
+if uname | grep Darwin &>/dev/null && type brew &>/dev/null; then
     export IS_MAC=1
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
 eval $(dircolors)
@@ -48,22 +49,29 @@ bindkey "^Q" push-line-or-edit
 bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
 # aliases
-alias ls='ls --color=auto -G'
-
-autoload -U compinit; compinit
-
-# Color in the file completion list
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+alias ls='eza -al'
+alias cat='bat --paging=never'
 
 # FZF config / setup
-#export FZF_DEFAULT_COMMAND='fd --no-messages --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --inline-info --border"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
 
 # BAT config / setup
 export BAT_THEME='gruvbox-dark'
-alias cat='bat --paging=never'
 
 # source antidote
 if [ ! -z $IS_MAC ]; then
@@ -74,3 +82,6 @@ fi
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
+
+autoload -U compinit
+compinit
