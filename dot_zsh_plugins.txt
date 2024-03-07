@@ -1,4 +1,16 @@
-zsh-users/zsh-completions
 spaceship-prompt/spaceship-prompt
 zimfw/asdf
 Aloxaf/fzf-tab
+peterhurford/up.zsh
+
+ohmyzsh/ohmyzsh path:plugins/aws
+
+belak/zsh-utils path:history
+belak/zsh-utils path:utility
+belak/zsh-utils path:editor
+
+${HOME}/.aliases
+
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
