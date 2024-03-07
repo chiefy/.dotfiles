@@ -1,2 +1,2 @@
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH:/usr/local/opt/fzf/bin
-export EDITOR="xcode --wait"
+export EDITOR="code --wait"

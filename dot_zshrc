@@ -51,6 +51,8 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 # aliases
 alias ls='eza -al'
 alias cat='bat --paging=never'
+alias aal='aws-azure-login -m cli -p $AWS_PROFILE'
+alias wo='cd $WORK'
 
 # FZF config / setup
 export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --inline-info --border"
@@ -83,5 +85,21 @@ fi
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
 
+#load custom completions
+fpath=(~/.completions $fpath)
+
+# aws profile switcher
+aws-profiles() {
+  cat ~/.aws/credentials | grep '\[' | grep -v '#' | tr -d '[' | tr -d ']'
+}
+
+set-aws-profile() {
+  local aws_profile=$1
+  set -x
+  export AWS_PROFILE=${aws_profile}
+  set +x
+}
+
+# load completions
 autoload -U compinit
 compinit
