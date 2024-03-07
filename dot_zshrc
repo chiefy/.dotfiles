@@ -23,6 +23,10 @@ eval $(dircolors)
 # FZF config / setup
 export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --inline-info --border"
 
+# load completions
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 
@@ -50,7 +54,3 @@ fi
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
-
-# load completions
-autoload -U compinit
-compinit
