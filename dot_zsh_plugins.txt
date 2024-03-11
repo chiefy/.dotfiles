@@ -1,11 +1,7 @@
+zimfw/asdf
 spaceship-prompt/spaceship-prompt
 peterhurford/up.zsh
-zimfw/asdf
 apachler/zsh-aws
-
-belak/zsh-utils path:history
-belak/zsh-utils path:utility
-belak/zsh-utils path:editor
 
 ${HOME}/.aliases
 webyneter/docker-aliases
@@ -13,4 +9,10 @@ webyneter/docker-aliases
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-history-substring-search
+
+belak/zsh-utils path:completion
+belak/zsh-utils path:history
+belak/zsh-utils path:utility
+belak/zsh-utils path:editor
+
 Aloxaf/fzf-tab
