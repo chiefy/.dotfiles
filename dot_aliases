@@ -1,5 +1,19 @@
-# aliases
+# misc
 alias ls='eza -al'
 alias cat='bat --paging=never'
 alias aal='aws-azure-login -m cli -p $AWS_PROFILE'
 alias wo='cd $WORK'
+
+# tar
+alias tarls="tar -tvf"
+alias untar="tar -xf"
+
+# find
+alias fd='find . -type d -name'
+alias ff='find . -type f -name'
+
+# url encode/decode
+alias urldecode='python3 -c "import sys, urllib.parse as ul; \
+    print(ul.unquote_plus(sys.argv[1]))"'
+alias urlencode='python3 -c "import sys, urllib.parse as ul; \
+    print (ul.quote_plus(sys.argv[1]))"'

@@ -1,7 +1,6 @@
 zimfw/asdf
 spaceship-prompt/spaceship-prompt
 peterhurford/up.zsh
-apachler/zsh-aws
 
 ${HOME}/.aliases
 webyneter/docker-aliases
@@ -15,4 +14,5 @@ belak/zsh-utils path:history
 belak/zsh-utils path:utility
 belak/zsh-utils path:editor
 
+apachler/zsh-aws
 Aloxaf/fzf-tab
