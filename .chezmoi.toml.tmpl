@@ -1,6 +1,14 @@
 {{- $osid := .chezmoi.os -}}
+{{- $email := "chief@beefdisciple.com" -}}
+{{- $isWork := false -}}
+
 {{- if hasKey .chezmoi.osRelease "id" -}}
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+{{- if eq .chezmoi.group "staff" -}}
+{{-   $isWork = true -}}
+{{-   $email = "christopher.najewicz@shutterfly.com" -}}
 {{- end -}}
 
 [git]
@@ -8,5 +16,6 @@
     autoPush = false
 
 [data]
-    email = "chief@beefdisciple.com"
+    email = {{ $email | quote }}
     osid = {{ $osid | quote }}
+    work = {{ $isWork }}

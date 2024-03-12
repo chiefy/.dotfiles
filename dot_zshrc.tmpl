@@ -1,18 +1,14 @@
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-export AWS_REGION=us-east-1
 export CLICOLOR=1
 export GITHUB_USERNAME=chiefy
 export LANG=en_US.UTF-8
 export WORK="${HOME}/Work"
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
-
-if [ -f /usr/local/etc/openssl/certs/zscaler_root_ca.pem ]; then
-    export NODE_EXTRA_CA_CERTS=/usr/local/etc/openssl/certs/zscaler_root_ca.pem
-fi
-
-if [ -d ${WORK}/re-makefiles-common ]; then
-    export MAKE_COMMON="${WORK}/re-makefiles-common"
-fi
+{{ if .work -}}
+export NODE_EXTRA_CA_CERTS=/usr/local/etc/openssl/certs/zscaler_root_ca.pem
+export MAKE_COMMON="${WORK}/re-makefiles-common"
+export AWS_REGION=us-east-1
+{{ end }}
 
 eval $(dircolors)
 
@@ -38,7 +34,6 @@ export BAT_THEME='gruvbox-dark'
 
 # source antidote
 {{ if eq .osid "darwin" }}
-echo "{{ .osid }}"
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 {{ else }}
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
