@@ -14,10 +14,6 @@ if [ -d ${WORK}/re-makefiles-common ]; then
     export MAKE_COMMON="${WORK}/re-makefiles-common"
 fi
 
-if uname | grep Darwin &>/dev/null && type brew &>/dev/null; then
-    export IS_MAC=1
-fi
-
 eval $(dircolors)
 
 # disable sort when completing `git checkout`
@@ -41,11 +37,12 @@ export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --inline-info --border"
 export BAT_THEME='gruvbox-dark'
 
 # source antidote
-if [ ! -z $IS_MAC ]; then
-    source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-else
-    source ${ZDOTDIR:-~}/.antidote/antidote.zsh
-fi
+{{ if eq .osid "darwin" }}
+echo "{{ .osid }}"
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+{{ else }}
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+{{ end }}
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
