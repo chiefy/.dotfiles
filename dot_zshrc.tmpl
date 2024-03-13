@@ -9,7 +9,6 @@ export NODE_EXTRA_CA_CERTS=/usr/local/etc/openssl/certs/zscaler_root_ca.pem
 export MAKE_COMMON="${WORK}/re-makefiles-common"
 export AWS_REGION=us-east-1
 {{ end }}
-
 eval $(dircolors)
 
 # disable sort when completing `git checkout`
@@ -33,11 +32,10 @@ export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --inline-info --border"
 export BAT_THEME='gruvbox-dark'
 
 # source antidote
-{{ if eq .osid "darwin" }}
+{{ if eq .osid "darwin" -}}
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-{{ else }}
+{{ else -}}
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 {{ end }}
-
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
