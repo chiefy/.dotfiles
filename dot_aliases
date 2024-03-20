@@ -3,6 +3,10 @@ alias ls='eza -al'
 alias cat='bat --paging=never'
 alias aal='aws-azure-login -m cli -p $AWS_PROFILE'
 alias wo='cd $WORK'
+alias getmyip4='curl -4 ifconfig.me'
+
+# bitwarden
+alias bws='bw unlock --raw'
 
 # tar
 alias tarls="tar -tvf"
