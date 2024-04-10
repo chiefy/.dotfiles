@@ -1,2 +1,5 @@
-export PATH=${HOME}/.bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH:/usr/local/opt/fzf/bin
+if [ -d /opt/homebrew/bin ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+export PATH=${HOME}/.bin:${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH:/usr/local/opt/fzf/bin
 export EDITOR="code --wait"
