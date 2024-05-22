@@ -1,8 +1,10 @@
 # misc
 alias ls='eza -al'
-alias cat='bat --paging=never'
-alias aal='aws-azure-login -m cli -p $AWS_PROFILE'
+alias cat='bat'
+alias sl='saml2aws login --cache-saml -a $AWS_PROFILE'
+alias sc='saml2aws console -a $AWS_PROFILE'
 alias wo='cd $WORK'
+alias tflive='cd $WORK/tf_live'
 alias getmyip4='curl -4 ifconfig.me'
 alias getmykeys='curl https://github.com/chiefy.keys >> ~/.ssh/authorized_keys'
 
