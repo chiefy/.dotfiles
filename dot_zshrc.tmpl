@@ -6,7 +6,7 @@ export WORK="${HOME}/Work"
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
 {{ if .work -}}
 export NODE_EXTRA_CA_CERTS=/usr/local/etc/openssl/certs/zscaler_root_ca.pem
-export MAKE_COMMON="${WORK}/re-makefiles-common"
+export MAKE_COMMON="${WORK}/re/re-makefiles-common"
 export AWS_REGION=us-east-1
 {{ end }}
 eval $(dircolors)

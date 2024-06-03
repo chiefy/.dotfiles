@@ -2,4 +2,10 @@ if [ -d /opt/homebrew/bin ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 export PATH=${HOME}/.bin:${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH:/usr/local/opt/fzf/bin
+
+#temp for stupid packer vscode extension
+if [ -d /Users/christopher.najewicz/.asdf/installs/packer/1.9.4/bin ]; then
+    export PATH="${PATH}:/Users/christopher.najewicz/.asdf/installs/packer/1.9.4/bin"
+fi
+
 export EDITOR="code --wait"
