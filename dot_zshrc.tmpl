@@ -40,5 +40,7 @@ source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
 
+{{ if .work -}}
 # saml2aws autocomplete
 eval "$(saml2aws --completion-script-zsh)"
+{{- end -}}
