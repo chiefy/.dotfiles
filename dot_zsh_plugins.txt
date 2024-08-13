@@ -1,5 +1,4 @@
 zimfw/asdf
-spaceship-prompt/spaceship-prompt
 peterhurford/up.zsh
 
 ${HOME}/.aliases

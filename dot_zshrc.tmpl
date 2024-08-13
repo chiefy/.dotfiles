@@ -4,32 +4,29 @@ export GITHUB_USERNAME=chiefy
 export LANG=en_US.UTF-8
 export WORK="${HOME}/Work"
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
+
+if ! bw login --check &>/dev/null; then
+    export BW_SESSION=$(bw login {{ .bwemail }} --raw)
+else
+    export BW_SESSION=$(bw unlock --raw)
+fi
+
 {{ if .work -}}
 export NODE_EXTRA_CA_CERTS=/usr/local/etc/openssl/certs/zscaler_root_ca.pem
 export MAKE_COMMON="${WORK}/re/re-makefiles-common"
 export AWS_REGION=us-east-1
 {{ end }}
+
 eval $(dircolors)
-
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set descriptions format to enable group support
-# NOTE: don't use escape sequences here, fzf-tab will ignore them
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-zstyle ':completion:*' menu no
-# preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-# switch group using `<` and `>`
-zstyle ':fzf-tab:*' switch-group '<' '>'
-
-# FZF config / setup
-export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --inline-info --border"
 
 # BAT config / setup
 export BAT_THEME='gruvbox-dark'
+
+# saml2aws config
+{{ if .work -}}
+# saml2aws autocomplete
+eval "$(saml2aws --completion-script-zsh)"
+{{- end -}}
 
 # source antidote
 {{ if eq .osid "darwin" -}}
@@ -40,7 +37,5 @@ source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
 
-{{ if .work -}}
-# saml2aws autocomplete
-eval "$(saml2aws --completion-script-zsh)"
-{{- end -}}
+eval "$(oh-my-posh init zsh --config ${HOME}/.oh_my_posh.toml)"
+

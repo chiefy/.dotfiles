@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 get_all_accounts() {
-    AWS_PROFILE={{ (bitwardenFields "item" "sfly-aws").profile.value }} \
+     AWS_PROFILE={{ (bitwardenFields "item" "sfly-aws").profile.value }} \
         aws organizations list-accounts |
         jq -r '.Accounts | sort_by(.Name) | .[] | select(.Name | match("^.*")) | "\(.Name):|\(.Id)"' |
         column -t -s "|"
