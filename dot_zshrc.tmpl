@@ -5,9 +5,11 @@ export LANG=en_US.UTF-8
 export WORK="${HOME}/Work"
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
 
-if ! bw login --check &>/dev/null; then
-    export BW_SESSION=$(bw login {{ .bwemail }} --raw)
-    echo "export BW_SESSION=$BW_SESSION" >>.envrc
+if ! bw login --check &>/dev/null || grep BW_SESSION=\$ $HOME/.envrc; then
+    bw logout
+    s=$(bw login {{ .bwemail }} --raw)
+    sed --in-place "s|BW_SESSION=.*|BW_SESSION=${s}|" $HOME/.envrc
+    unset s
 fi
 
 {{- if .work -}}

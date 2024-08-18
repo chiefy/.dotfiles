@@ -1,7 +1,13 @@
 if [ -d /opt/homebrew/bin ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -f /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
 fi
-export PATH=${HOME}/.bin:${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH:/usr/local/opt/fzf/bin
+
+export PATH=${HOME}/.bin:$PATH
+export PATH=${HOMEBREW_PREFIX:-}/opt/coreutils/libexec/gnubin:$PATH
+export PATH=${HOMEBREW_PREFIX:-}/opt/fzf/bin:$PATH
+export PATH=${HOMEBREW_PREFIX:-}/opt/gnu-sed/libexec/gnubin:$PATH
 
 #temp for stupid packer vscode extension
 if [ -d /Users/christopher.najewicz/.asdf/installs/packer/1.9.4/bin ]; then
