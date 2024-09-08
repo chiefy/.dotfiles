@@ -31,19 +31,10 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       commit_icon = '@'
       fetch_status = true
 
-[[blocks]]
-  type = 'rprompt'
-  overflow = 'hidden'
-
   [[blocks.segments]]
-    type = 'executiontime'
+    type = 'aws'
     style = 'plain'
-    foreground = 'yellow'
-    background = 'transparent'
-    template = '{{ .FormattedMs }}'
-
-    [blocks.segments.properties]
-      threshold = 5000
+    template = '  {{.Profile}} '
 
 [[blocks]]
   type = 'prompt'
@@ -72,3 +63,17 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   foreground = 'magenta'
   background = 'transparent'
   template = '❯❯ '
+
+[[blocks]]
+  type = 'rprompt'
+  overflow = 'hidden'
+
+  [[blocks.segments]]
+    type = 'executiontime'
+    style = 'plain'
+    foreground = 'yellow'
+    background = 'transparent'
+    template = '{{ .FormattedMs }}'
+
+    [blocks.segments.properties]
+      threshold = 5000
