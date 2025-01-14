@@ -2,11 +2,12 @@
 alias ls='eza -al'
 alias cat='bat'
 alias sl='saml2aws login --cache-saml -a $AWS_PROFILE'
-alias sc='saml2aws console -a $AWS_PROFILE'
+alias sc='open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=https://aws.amazon.com"; sleep 5; saml2aws console -a $AWS_PROFILE'
 alias wo='cd $WORK'
 alias tflive='cd $WORK/tf_live'
 alias getmyip4='curl -4 ifconfig.me'
 alias getmykeys='curl https://github.com/chiefy.keys >> ~/.ssh/authorized_keys'
+alias dnslookup='dig @corpdns.corp.shutterfly.com'
 
 # bitwarden
 alias bws='bw unlock --raw'
