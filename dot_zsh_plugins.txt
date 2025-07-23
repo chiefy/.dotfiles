@@ -16,3 +16,5 @@ belak/zsh-utils path:editor
 
 apachler/zsh-aws
 Aloxaf/fzf-tab
+
+ohmyzsh/ohmyzsh path:plugins/ssh-agent

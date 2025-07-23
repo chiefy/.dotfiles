@@ -5,13 +5,6 @@ export LANG=en_US.UTF-8
 export WORK="${HOME}/Work"
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
 
-if ! bw login --check &>/dev/null || grep BW_SESSION=\$ $HOME/.envrc; then
-    bw logout
-    s=$(bw login {{ .bwemail }} --raw)
-    sed --in-place "s|BW_SESSION=.*|BW_SESSION=${s}|" $HOME/.envrc
-    unset s
-fi
-
 {{ if .work -}}
 export NODE_EXTRA_CA_CERTS=/usr/local/etc/openssl/certs/zscaler_root_ca.pem
 export MAKE_COMMON="${WORK}/re/re-makefiles-common"
