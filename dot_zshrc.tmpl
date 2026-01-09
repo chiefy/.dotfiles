@@ -1,4 +1,8 @@
+# asdf setup
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+export ASDF_DATA_DIR={{ .chezmoi.homeDir }}/.asdf
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
+
 export CLICOLOR=1
 export GITHUB_USERNAME=chiefy
 export LANG=en_US.UTF-8
@@ -20,7 +24,7 @@ export BAT_THEME='gruvbox-dark'
 {{ if .work -}}
 # saml2aws autocomplete
 eval "$(saml2aws --completion-script-zsh)"
-{{- end -}}
+{{- end }}
 
 # source antidote
 {{ if eq .osid "darwin" -}}

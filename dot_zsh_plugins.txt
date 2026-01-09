@@ -1,4 +1,3 @@
-zimfw/asdf
 peterhurford/up.zsh
 
 ${HOME}/.aliases
