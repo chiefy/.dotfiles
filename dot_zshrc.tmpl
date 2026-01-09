@@ -20,11 +20,8 @@ eval $(dircolors)
 # BAT config / setup
 export BAT_THEME='gruvbox-dark'
 
-# saml2aws config
-{{ if .work -}}
-# saml2aws autocomplete
-eval "$(saml2aws --completion-script-zsh)"
-{{- end }}
+# Need to load this for zsh-aws plugin
+autoload -Uz bashcompinit && bashcompinit
 
 # source antidote
 {{ if eq .osid "darwin" -}}
@@ -38,5 +35,11 @@ fi
 {{ end }}
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
+
+# saml2aws config
+{{ if .work -}}
+# saml2aws autocomplete
+eval "$(saml2aws --completion-script-zsh)"
+{{- end }}
 
 eval "$(oh-my-posh init zsh --config ${HOME}/.oh_my_posh.toml)"
