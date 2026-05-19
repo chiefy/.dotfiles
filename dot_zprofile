@@ -4,7 +4,7 @@ elif [ -f /usr/local/bin/brew ]; then
     eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-export PATH=${HOME}/.bin:$PATH
+export PATH=${HOME}/.bin:${HOME}/.local/bin:$PATH
 export PATH=${HOMEBREW_PREFIX:-}/opt/coreutils/libexec/gnubin:$PATH
 export PATH=${HOMEBREW_PREFIX:-}/opt/fzf/bin:$PATH
 export PATH=${HOMEBREW_PREFIX:-}/opt/gnu-sed/libexec/gnubin:$PATH
